@@ -1,0 +1,52 @@
+{
+  "format_version": 1,
+  "imports": [
+    {
+      "target_table": "HiMTA::Author",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "HiMTA::Authors.csv",
+        "has_header": true
+      },
+      "import_settings": {
+        "import_columns": [
+          "author_id",
+          "name",
+          "created",
+          "updated"
+        ]
+      }
+    },
+    {
+      "target_table": "HiMTA::ExtraInfo.Address",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "HiMTA::Address.csv",
+        "has_header": true
+      },
+      "import_settings": {
+        "import_columns": [
+					"author_id",
+					"city",
+					"strt",
+					"hnum"
+        ]
+      }
+    },
+    {
+      "target_table": "HiMTA::ExtraInfo.Book",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "HiMTA::Books.csv",
+        "has_header": true
+      },
+      "import_settings": {
+        "import_columns": [
+					"book_id",
+                    "author_id",
+                    "name"
+        ]
+      }
+    }
+  ]
+}

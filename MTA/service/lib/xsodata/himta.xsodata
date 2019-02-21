@@ -1,0 +1,28 @@
+service namespace "HiMTA"{
+
+    "HiMTA::Author" as "Authors"
+                navigates("Authors_2_Address" as "toAddress", "Authors_2_Books" as "toBooks")
+            create using "xsjs.author:authorsCreate.xsjslib::authorsCreate"
+            update using "xsjs.author:authorsUpdate.xsjslib::authorsUpdate"
+            delete forbidden;
+
+    "HiMTA::ExtraInfo.Address" as "Address"
+            create forbidden
+            update forbidden
+            delete forbidden;
+
+    "HiMTA::ExtraInfo.Book" as "Books"
+                navigates("Books_2_Author" as "toAuthor")
+            create forbidden
+            update forbidden
+            delete forbidden;
+
+    association "Authors_2_Address" principal "Authors"("author_id")
+            multiplicity "1" dependent "Address"("author_id") multiplicity "1";
+
+    association "Authors_2_Books" principal "Authors"("author_id")
+            multiplicity "1" dependent "Books"("author_id") multiplicity "*";
+
+    association "Books_2_Author" principal "Books"("author_id")
+            multiplicity "1" dependent "Authors"("author_id") multiplicity "1";
+}

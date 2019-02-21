@@ -1,0 +1,48 @@
+<mvc:View controllerName="author_display.controller.Display" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc">
+	<Shell>
+	<App>
+	<pages>
+	<Page>
+    <Panel id="PeopleDetailPanel" headerText="Details" class="sapUiResponsiveMargin" width="auto">
+    <content>
+      <Table id="details" items = "{
+      path: 'authors>/Authors'
+      }">
+        <columns>
+          <Column id="authorIdColumn">
+            <Text text="{i18n>authorIdText}" />
+          </Column>
+          <Column id="authorNameColumn">
+            <Text text="{i18n>authorNameText}" />
+          </Column>
+             <Column id="authorUpdated">
+            <Text text="{i18n>authorUpdateText}" />
+          </Column>
+            <Column id="authorCreated">
+            <Text text="{i18n>authorCreateText}" />
+          </Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Label text="{authors>author_id}" />
+            </cells>
+            <cells>
+              <Label text="{authors>name}" />
+            </cells>
+            <cells>
+              <!-- <Label text="{authors>ts_update}" /> -->
+            </cells>
+            <cells>
+              <!-- <Label text="{authors>ts_create}" /> -->
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+  </Panel>
+	</Page>
+	</pages>
+	</App>
+	</Shell>
+        </mvc:View>

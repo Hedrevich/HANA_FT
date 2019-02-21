@@ -1,0 +1,60 @@
+<mvc:View
+    controllerName="author_display.controller.Details"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    >
+    <Shell>
+	<App id="details">
+	<pages>
+	<Page
+    showNavButton = "true"
+    navButtonPress = ".onNavBack"
+    title = "{authors>usid}">
+    <Panel id="PeopleDetailPanel" headerText="Details" class="sapUiResponsiveMargin" width="auto">
+    <content>
+      <Table>
+        <columns>
+          <Column id="authorNameColumn">
+            <Text text="{i18n>authorNameLabelText}" />
+          </Column>
+          <Column id="firstNameColumn">
+            <Text text="{i18n>firstNameLabelText}" /> 
+          </Column>
+          <Column id="lastNameColumn">
+            <Text text="{i18n>lastNameLabelText}" />
+          </Column>
+          <Column id="GenderColumn">
+            <Text text="{i18n>genderLabelText}" />
+          </Column>
+          <Column id="EmailsColumn">
+            <Text text="{i18n>emailsLabelText}" />
+          </Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Label text="{People>UserName}" />
+            </cells>
+            <cells>
+              <Label text="{People>FirstName}" />
+            </cells>
+            <cells>
+              <Label text="{People>LastName}" />
+            </cells>
+            <cells>
+              <Label text="{People>Gender}" />
+            </cells>
+            <cells>
+              <FormattedText htmlText="{People>Emails/0}&lt;br&gt;{People>Emails/1}" />
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+  </Panel>
+	</Page>
+	</pages>
+	</App>
+</Shell>
+</mvc:View>

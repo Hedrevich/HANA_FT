@@ -1,0 +1,94 @@
+<mvc:View controllerName="author_display.controller.App" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:tnt="sap.tnt">
+  <App id="app">
+    <Page id="mainPage" class="sapUiResponsiveContentPadding" title="{i18n>authorsText}">
+      <IconTabBar id="idIconTabBarFiori2" upperCase="true" class="sapUiResponsiveContentPadding">
+        <items>
+
+          <IconTabFilter id="createSomePanel" icon="sap-icon://create">
+            <Panel class="sapUiResponsiveMargin" width="auto">
+              <l:VerticalLayout width="100%">
+                <l:content width="100%">
+                  <Label text="{i18n>AuthorNameLabelText}" design="Bold"/>
+                  <Input id="AuthorNameInput"/>
+                </l:content>
+                <Button icon="sap-icon://create" text="Create" press=".createauthor" class="sapUiSmallLeftMargin" width="100%"/>
+              </l:VerticalLayout>
+            </Panel>
+          </IconTabFilter>
+
+          <IconTabFilter id="updateSomePanel" icon="sap-icon://edit">
+            <Panel class="sapUiResponsiveMargin" width="auto">
+              <l:VerticalLayout width="100%">
+                <l:content width="100%">
+                  <Label text="{i18n>authorIdText}" design="Bold"/>
+                  <Input id="AuthorNameUpdate_id" enabled="false"/>
+                  <Label text="{i18n>AuthorNameLabelText}" labelFor="AuthorNameInput_U" design="Bold"/>
+                  <Input id="AuthorNameInput_U" width="100%" required="true"/>
+                </l:content>
+              </l:VerticalLayout>
+              <Button icon="sap-icon://edit" text="Update" press=".updateauthor" class="sapUiSmallLeftMargin" width="100%"/>
+            </Panel>
+          </IconTabFilter>
+
+          <IconTabFilter id="deleteSomePanel" icon="sap-icon://delete">
+            <Panel class="sapUiResponsiveMargin" width="auto">
+              <l:VerticalLayout width="100%">
+                <l:content width="100%">
+                  <Label text="{i18n>authorIdText}" labelFor="AuthorNameDelete_id" design="Bold"/>
+                  <Input id="AuthorNameDelete_id" required="true" />
+                  <Label text="{i18n>AuthorNameLabelText}"  design="Bold"/>
+                  <Input id="AuthorNameInput_D" width="100%" enabled="false" />
+                </l:content>
+              </l:VerticalLayout>
+              <Button icon="sap-icon://delete" text="Delete" press=".deleteauthor" class="sapUiSmallLeftMargin" width="100%"/>
+            </Panel>
+          </IconTabFilter>
+
+        </items>
+
+      </IconTabBar>
+
+      <content>
+        <Table id="details" items="{
+              path: 'authors>/Authors'
+              }" mode="SingleSelectMaster" selectionChange="goToDetails">
+          <headerToolbar>
+            <Toolbar>
+              <Title text="{i18n>mainPageTitle}"/>
+            </Toolbar>
+          </headerToolbar>
+          <columns>
+            <Column id="authorIdColumn">
+              <Text text="{i18n>authorIdText}"/>
+            </Column>
+            <Column id="authorNameColumn">
+              <Text text="{i18n>AuthorNameLabelText}"/>
+            </Column>
+            <Column id="authorCreatedColumn">
+              <Text text="{i18n>authorCreateText}"/>
+            </Column>
+            <Column id="authorUpdatedColumn">
+              <Text text="{i18n>authorUpdateText}"/>
+            </Column>
+          </columns>
+          <items>
+            <ColumnListItem press=".goToDetails">
+              <cells>
+                <Label text="{authors>author_id}"/>
+              </cells>
+              <cells>
+                <Label text="{authors>name}"/>
+              </cells>
+              <cells>
+                <Label text="{authors>ts_create}"/>
+              </cells>
+              <cells>
+                <Label text="{authors>ts_update}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </content>
+    </Page>
+  </App>
+</mvc:View>

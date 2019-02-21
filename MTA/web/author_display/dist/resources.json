@@ -1,0 +1,156 @@
+{
+    "resources": [
+        {
+            "name": "Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "controller\\AboutPage-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller\\AboutPage.controller.js"
+        },
+        {
+            "name": "controller\\Detail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller\\Detail.controller.js"
+        },
+        {
+            "name": "controller\\DetailDetail-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller\\DetailDetail.controller.js"
+        },
+        {
+            "name": "controller\\FlexibleColumnLayout-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller\\FlexibleColumnLayout.controller.js"
+        },
+        {
+            "name": "controller\\Master-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "controller\\Master.controller.js"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "i18n\\i18n.properties",
+            "raw": "i18n\\i18n.properties"
+        },
+        {
+            "name": "i18n\\i18n_ru_RU.properties",
+            "raw": "i18n\\i18n.properties",
+            "locale": "_ru_RU"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "tmp\\Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "tmp\\Component.js"
+        },
+        {
+            "name": "tmp\\controller\\AboutPage.controller.js"
+        },
+        {
+            "name": "tmp\\controller\\Detail.controller.js"
+        },
+        {
+            "name": "tmp\\controller\\DetailDetail.controller.js"
+        },
+        {
+            "name": "tmp\\controller\\FlexibleColumnLayout.controller.js"
+        },
+        {
+            "name": "tmp\\controller\\Master.controller.js"
+        },
+        {
+            "name": "tmp\\i18n\\i18n.properties",
+            "raw": "i18n\\i18n.properties"
+        },
+        {
+            "name": "tmp\\i18n\\i18n_ru_RU.properties",
+            "raw": "i18n\\i18n.properties",
+            "locale": "_ru_RU"
+        },
+        {
+            "name": "tmp\\index.html"
+        },
+        {
+            "name": "tmp\\manifest.json"
+        },
+        {
+            "name": "tmp\\view\\AboutPage.view.xml"
+        },
+        {
+            "name": "tmp\\view\\Detail.view.xml"
+        },
+        {
+            "name": "tmp\\view\\DetailDetail.view.xml"
+        },
+        {
+            "name": "tmp\\view\\FlexibleColumnLayout.view.xml"
+        },
+        {
+            "name": "tmp\\view\\Master.view.xml"
+        },
+        {
+            "name": "tmp-dbg\\Component.js"
+        },
+        {
+            "name": "tmp-dbg\\controller\\AboutPage.controller.js"
+        },
+        {
+            "name": "tmp-dbg\\controller\\Detail.controller.js"
+        },
+        {
+            "name": "tmp-dbg\\controller\\DetailDetail.controller.js"
+        },
+        {
+            "name": "tmp-dbg\\controller\\FlexibleColumnLayout.controller.js"
+        },
+        {
+            "name": "tmp-dbg\\controller\\Master.controller.js"
+        },
+        {
+            "name": "view\\AboutPage.view.xml"
+        },
+        {
+            "name": "view\\Detail.view.xml"
+        },
+        {
+            "name": "view\\DetailDetail.view.xml"
+        },
+        {
+            "name": "view\\FlexibleColumnLayout.view.xml"
+        },
+        {
+            "name": "view\\Master.view.xml"
+        },
+        {
+            "name": "xs-app.json"
+        }
+    ]
+}

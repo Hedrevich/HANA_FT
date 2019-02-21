@@ -1,0 +1,26 @@
+<mvc:View
+controllerName="author_create.controller.App"
+	xmlns="sap.m"
+    displayBlock="true"
+	xmlns:mvc="sap.ui.core.mvc">
+        <App class="sapUiSizeCompact" id="author_create">
+            <pages>
+                <Page title="{i18n>appTitle}">
+                    <content>
+                        <Panel class="sapUiResponsiveMargin" width="auto">
+                            <content>
+                            <Button
+                                    text="Create"
+                                    press=".createauthor"
+                                    class="sapUiSmallMarginEnd"/>
+                            <Input
+                                id="input_name"
+                                value="author name"
+                                width="20%" />
+                            </content>
+                        </Panel>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+</mvc:View>
