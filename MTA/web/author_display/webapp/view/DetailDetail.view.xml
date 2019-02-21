@@ -20,7 +20,7 @@
 			</DynamicPageTitle>
 		</title>
 		<content>
-			<m:Link text="Navigate to next page…" press="handleAboutPress" />
+			<!-- <m:Link text="Navigate to next page…" press="handleAboutPress" /> -->
 		</content>
 	</DynamicPage>
 </m:View>
