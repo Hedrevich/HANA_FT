@@ -1,19 +1,27 @@
-<core:View displayBlock="true" controllerName="author_display.controller.Master" height="100%" xmlns="sap.m" xmlns:f="sap.f" xmlns:core="sap.ui.core">
-	<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
+<core:View displayBlock="true" controllerName="author_display.controller.Master" height="100%"
+	  xmlns="sap.m"
+	  xmlns:f="sap.f"
+	  xmlns:core="sap.ui.core">
+	<f:DynamicPage id="dynamicPageId"
+				   toggleHeaderOnTitleClick="false">
 		<!-- Title -->
 		<f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
-					<Title id="authorsTableTitle"/>
+					<Title id="authorsTableTitle" text="Authors and their books"/>
 				</f:heading>
 			</f:DynamicPageTitle>
 		</f:title>
 
 		<!-- Content -->
 		<f:content>
-			<Table id="authorsTable" inset="false" items="{
+			<Table id="authorsTable"
+				   inset="false"
+				   items="{
 						path: 'authors>/Authors'
-					}" class="sapFDynamicPageAlignContent" width="auto" updateFinished=".onUpdateFinished">
+					}"
+				   class="sapFDynamicPageAlignContent"
+				   width="auto">
 				<headerToolbar>
 					<OverflowToolbar>
 						<ToolbarSpacer/>
@@ -24,39 +32,20 @@
 				</headerToolbar>
 				<columns>
 					<Column width="12em">
-						<Text text="Author name"/>
+						<Text text="Product" />
 					</Column>
-					<Column hAlign="Center">
-						<Text text="Created"/>
-					</Column>
-					<Column hAlign="Center">
-						<Text text="Last modified"/>
+					<Column	hAlign="End">
+						<Text text="Price" />
 					</Column>
 				</columns>
 				<items>
 					<ColumnListItem type="Navigation" press="onListItemPress">
 						<cells>
-							<ObjectIdentifier title="{authors>name}" text="{authors>author_id}"/>
-							<ObjectIdentifier
-								text="{
-											 path: 'authors>created',
-											 type: 'sap.ui.model.type.DateTime',
-											 formatOptions: {
-												pattern: 'HH:mm:ss, dd.MM.yyyy',
-												strictParsing: true ,
-												UTC: true
-											 }
-										  }"/>
-							<ObjectIdentifier
-								text="{
-											 path: 'authors>updated',
-											 type: 'sap.ui.model.type.DateTime',
-											 formatOptions: {
-												pattern: 'HH:mm:ss, dd.MM.yyyy',
-												strictParsing: true ,
-												UTC: true
-											 }
-										  }"/>
+							<ObjectIdentifier title="{authors>name}" text="{authors>author_id}" />
+							<ObjectNumber
+									number="{
+										parts:[{path:'authors>created'},{path:'authors>updated'}]
+									}"/>
 						</cells>
 					</ColumnListItem>
 				</items>

@@ -3,71 +3,68 @@ sap.ui.define([
   "sap/ui/core/mvc/Controller",
   "sap/ui/model/Filter",
   "sap/ui/model/FilterOperator",
-  "sap/ui/model/Sorter",
+  'sap/ui/model/Sorter',
+  'sap/m/MessageBox',
   "sap/ui/core/Fragment"
-], function(JSONModel, Controller, Filter, FilterOperator, Sorter, Fragment) {
+], function(JSONModel, Controller, Filter, FilterOperator, Sorter, MessageBox, Fragment) {
   "use strict";
 
   return Controller.extend("author_display.controller.Master", {
-
-    onInit: function() {
-      this.oRouter = this.getOwnerComponent().getRouter();
-      this._bDescendingSort = false;
-    },
-
-    createAuthor: function() {
-      var sName = this.getView().byId("newAuthorNameInput").getValue();
-
-      function successHandler() {
-        oTable.getModel("authors").refresh(true);
-      }
-
-      function errorHandler() {
-        //
-      }
-
-      if (!sName) {
-        var dialog = new sap.m.Dialog({
-          title: 'Error',
-          type: 'Message',
-          state: 'Error',
-          content: new sap.m.Text({
-            text: 'Enter all necessarry field'
-          }),
-          beginButton: new sap.m.Button({
-            text: 'OK',
-            press: function() {
-              dialog.close();
+      onInit: function() {
+        this.oRouter = this.getOwnerComponent().getRouter();
+        this._bDescendingSort = false;
+      },
+      createAuthor: function() {
+        var Name = this.getbyId("newAuthorNameInput").getValue();
+        if (!Name) {
+          var dialog = new sap.m.Dialog({
+            title: 'Error',
+            type: 'Message',
+            state: 'Error',
+            content: new sap.m.Text({
+              text: 'Enter all necessarry field'
+            }),
+            beginButton: new sap.m.Button({
+              text: 'OK',
+              press: function() {
+                dialog.close();
+              }
+            }),
+            afterClose: function() {
+              dialog.destroy();
             }
-          }),
-          afterClose: function() {
-            dialog.destroy();
+          });
+
+          dialog.open();
+        } else {
+          var oTable = this.getView().byId('authorsTable');
+          var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://p2001079359trial-trial-dev-service.cfapps.eu10.hana.ondemand.com/xsodata/himta.xsodata/Authors",
+            "method": "POST",
+            "headers": {
+              "content-type": "application/json"
+            },
+            "processData": false,
+            "data": "{\"name\": \"" + Name + "\""
           }
-        });
-
-        dialog.open();
-      } else {
-        var oTable = this.getView().byId('authorsTable');
-
-        var oData = {
-          name: sName
         };
-
-        oTable.getModel("authors").create("/Authors", oData, {
-          success: successHandler,
-          error: errorHandler
+        $.ajax(settings).done(function(response) {
+          console.log(response);
+          oTable.getModel("authors").refresh(true);
         });
-      };
-
-      this.byId("createDialog").close();
+        this.byId("createDialog").close();
+      },
+    closeDialog: function() {
+      this.getView().byId("createDialog").close();
     },
-
     onAdd: function() {
       var oView = this.getView();
       if (!this.byId("createDialog")) {
         Fragment.load({
           id: oView.getId(),
-          name: "author_display.fragment.Dialog",
+          name: "author_display.view.Dialog",
           controller: this
         }).then(function(oDialog) {
           oView.addDependent(oDialog);
@@ -77,16 +74,13 @@ sap.ui.define([
         this.byId("createDialog").open();
       }
     },
-
-    closeDialog: function() {
-      this.getView().byId("createDialog").close();
-    },
-
-    //works
     onListItemPress: function(oEvent) {
       var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(1),
         authorPath = oEvent.getSource().getBindingContext("authors").getPath(),
         author = authorPath.split("/").slice(-1).pop();
+      // var author_id = author.substr(-7).slice(-1);
+
+      // this.oRouter.navTo("detail", {layout: oNextUIState.layout, author: author, author_id: author_id});
       this.oRouter.navTo("detail", {
         layout: oNextUIState.layout,
         author: author
@@ -104,7 +98,6 @@ sap.ui.define([
 
       this.getView().byId("authorsTable").getBinding("items").filter(oTableSearchState, "Application");
     },
-
     //works
     onSort: function(oEvent) {
       this._bDescendingSort = !this._bDescendingSort;
@@ -114,22 +107,6 @@ sap.ui.define([
         oSorter = new Sorter("name", this._bDescendingSort);
 
       oBinding.sort(oSorter);
-    },
-
-    //works
-    onUpdateFinished: function(oEvent) {
-      // update the worklist's object counter after the table update
-      var sTitle,
-        oTable = oEvent.getSource(),
-        iTotalItems = oEvent.getParameter("total");
-      // only update the counter if the length is final and
-      // the table is not empty
-      if (iTotalItems && oTable.getBinding("items").isLengthFinal()) {
-        sTitle = 'Authors(' + iTotalItems + ')';
-      } else {
-        sTitle = "Authors";
-      }
-      this.getView().byId("authorsTableTitle").setText(sTitle);
     }
   });
 }, true);
