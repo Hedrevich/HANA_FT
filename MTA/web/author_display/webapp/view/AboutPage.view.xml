@@ -1,6 +1,6 @@
-<!-- <View xmlns="sap.m" displayBlock="true" xmlns:f="sap.f" controllerName="author_display.controller.AboutPage" height="100%">
+<View xmlns="sap.m" displayBlock="true" xmlns:f="sap.f" controllerName="author_display.controller.AboutPage" height="100%">
 	<f:DynamicPage toggleHeaderOnTitleClick="false">
-
+		<!-- DynamicPage Title -->
 		<f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
@@ -9,4 +9,4 @@
 			</f:DynamicPageTitle>
 		</f:title>
 	</f:DynamicPage>
-</View> -->
+</View>

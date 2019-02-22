@@ -23,6 +23,7 @@
 
 				<actions>
 					<m:Button text="Edit" type="Emphasized" press="toggleAreaPriority"/>
+					<m:Button text="Delete" type="Transparent"/>
 				</actions>
 
 			</ObjectPageDynamicHeaderTitle>
@@ -32,15 +33,15 @@
 			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
 				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
 					<m:Label text="Street"/>
-					<m:Text text="{authors>toAddress/strt}"/>
+					<m:Text text="{= !${authors>toAddress/strt} ? '-' : ${authors>toAddress/strt}}"/>
 				</m:VBox>
 				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
 					<m:Label text="Home number"/>
-					<m:Text text="{authors>toAddress/hnum}"/>
+					<m:Text text="{= !${authors>toAddress/hnum} ? '-' : ${authors>toAddress/hnum}}"/>
 				</m:VBox>
 				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
 					<m:Label text="City"/>
-					<m:ObjectNumber number="{authors>toAddress/city}" emphasized="false"/>
+					<m:ObjectNumber number="{= !${authors>toAddress/city} ? '-' : ${authors>toAddress/city}}" emphasized="false"/>
 				</m:VBox>
 			</m:FlexBox>
 		</headerContent>

@@ -1,70 +1,74 @@
 sap.ui.define([
-	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/mvc/Controller"
-], function (JSONModel, Controller) {
-	"use strict";
+  "sap/ui/model/json/JSONModel",
+  "sap/ui/core/mvc/Controller"
+], function(JSONModel, Controller) {
+  "use strict";
 
-	return Controller.extend("author_display.controller.FlexibleColumnLayout", {
-		
-		//initialization of router
-		onInit: function () {
-			this.oRouter = this.getOwnerComponent().getRouter();
-			this.oRouter.attachRouteMatched(this.onRouteMatched, this);
-			this.oRouter.attachBeforeRouteMatched(this.onBeforeRouteMatched, this);
-		},
+  return Controller.extend("author_display.controller.FlexibleColumnLayout", {
 
-		onBeforeRouteMatched: function(oEvent) {
+    //initialization of router
+    onInit: function() {
+      this.oRouter = this.getOwnerComponent().getRouter();
+      this.oRouter.attachRouteMatched(this.onRouteMatched, this);
+      this.oRouter.attachBeforeRouteMatched(this.onBeforeRouteMatched, this);
+    },
 
-			var oModel = this.getOwnerComponent().getModel();
+    onBeforeRouteMatched: function(oEvent) {
 
-			var sLayout = oEvent.getParameter("arguments").layout;
+      var oModel = this.getOwnerComponent().getModel();
 
-			// If there is no layout parameter, query for the default level 0 layout (normally OneColumn)
-			if (!sLayout) {
-				var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(0);
-				sLayout = oNextUIState.layout;
-			}
+      var sLayout = oEvent.getParameter("arguments").layout;
 
-			// Update the layout of the FlexibleColumnLayout
-			if (sLayout) {
-				oModel.setProperty("/layout", sLayout);
-			}
-		},
+      // If there is no layout parameter, query for the default level 0 layout (normally OneColumn)
+      if (!sLayout) {
+        var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(0);
+        sLayout = oNextUIState.layout;
+      }
 
-		onRouteMatched: function (oEvent) {
-			var sRouteName = oEvent.getParameter("name"),
-				oArguments = oEvent.getParameter("arguments");
+      // Update the layout of the FlexibleColumnLayout
+      if (sLayout) {
+        oModel.setProperty("/layout", sLayout);
+      }
+    },
 
-			this._updateUIElements();
+    onRouteMatched: function(oEvent) {
+      var sRouteName = oEvent.getParameter("name"),
+        oArguments = oEvent.getParameter("arguments");
 
-			// Save the current route name
-			this.currentRouteName = sRouteName;
-			this.currentAuthor = oArguments.author;
-			this.currentBook = oArguments.book;
-		},
+      this._updateUIElements();
 
-		onStateChanged: function (oEvent) {
-			var bIsNavigationArrow = oEvent.getParameter("isNavigationArrow"),
-				sLayout = oEvent.getParameter("layout");
+      // Save the current route name
+      this.currentRouteName = sRouteName;
+      this.currentAuthor = oArguments.author;
+      this.currentBook = oArguments.book;
+    },
 
-			this._updateUIElements();
+    onStateChanged: function(oEvent) {
+      var bIsNavigationArrow = oEvent.getParameter("isNavigationArrow"),
+        sLayout = oEvent.getParameter("layout");
 
-			// Replace the URL with the new layout if a navigation arrow was used
-			if (bIsNavigationArrow) {
-				this.oRouter.navTo(this.currentRouteName, {layout: sLayout, author: this.currentAuthor, book: this.currentBook}, true);
-			}
-		},
+      this._updateUIElements();
 
-		// Update the close/fullscreen buttons visibility
-		_updateUIElements: function () {
-			var oModel = this.getOwnerComponent().getModel();
-			var oUIState = this.getOwnerComponent().getHelper().getCurrentUIState();
-			oModel.setData(oUIState);
-		},
+      // Replace the URL with the new layout if a navigation arrow was used
+      if (bIsNavigationArrow) {
+        this.oRouter.navTo(this.currentRouteName, {
+          layout: sLayout,
+          author: this.currentAuthor,
+          book: this.currentBook
+        }, true);
+      }
+    },
 
-		onExit: function () {
-			this.oRouter.detachRouteMatched(this.onRouteMatched, this);
-			this.oRouter.detachBeforeRouteMatched(this.onBeforeRouteMatched, this);
-		}
-	});
+    // Update the close/fullscreen buttons visibility
+    _updateUIElements: function() {
+      var oModel = this.getOwnerComponent().getModel();
+      var oUIState = this.getOwnerComponent().getHelper().getCurrentUIState();
+      oModel.setData(oUIState);
+    },
+
+    onExit: function() {
+      this.oRouter.detachRouteMatched(this.onRouteMatched, this);
+      this.oRouter.detachBeforeRouteMatched(this.onBeforeRouteMatched, this);
+    }
+  });
 }, true);

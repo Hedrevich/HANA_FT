@@ -32,12 +32,15 @@
 			"id": "fcl"
 		},
 		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "author_display.i18n.i18n"
+				}
+			},
 			"authors": {
 				"dataSource": "mainService",
 				"settings": {
-					"defaultBindingMode": "TwoWay",
-					"defaultCountMode": "Inline",
-					"useBatch": false,
 					"disableHeadRequestForToken": true
 				}
 			}

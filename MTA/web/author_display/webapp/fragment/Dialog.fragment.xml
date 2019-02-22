@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+        xmlns:l="sap.ui.layout" >
+    <Dialog title="Create new author" id="createDialog">
+        <Panel width="100%">
+            <l:VerticalLayout>
+                <l:content>
+                    <Label text="Author name" width="300px" labelFor="newAuthorNameInput"/>
+                    <Input id="newAuthorNameInput" width="300px" required="true"/>
+                    <Button text="Create" type="Accept" width="300px" press=".createAuthor"/>
+                    <Button text="Cancel" type="Reject" width="300px" press=".closeDialog"/>
+                </l:content>
+            </l:VerticalLayout>
+        </Panel>
+    </Dialog>
+</core:FragmentDefinition>

@@ -17,12 +17,8 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			this.setModel(oModel);
 
-			// set products demo model on this sample
-			// var oProductsModel = new JSONModel(jQuery.sap.getModulePath("sap.ui.demo.mock", "/products.json"));
-			// oProductsModel.setSizeLimit(1000);
-			// this.setModel(oProductsModel, "products");
-
-
+            // set the device model
+            // this.setModel(models.createDeviceModel(), "device");
 			this.getRouter().initialize();
 		},
 
