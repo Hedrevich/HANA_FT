@@ -50,13 +50,16 @@
             "name": "di.code-validation.core_issues.json"
         },
         {
+            "name": "fragment\\Dialog.fragment.xml"
+        },
+        {
             "name": "i18n\\i18n.properties",
             "raw": "i18n\\i18n.properties"
         },
         {
-            "name": "i18n\\i18n_ru_RU.properties",
+            "name": "i18n\\i18n_ru.properties",
             "raw": "i18n\\i18n.properties",
-            "locale": "_ru_RU"
+            "locale": "_ru"
         },
         {
             "name": "index.html"
@@ -87,13 +90,16 @@
             "name": "tmp\\controller\\Master.controller.js"
         },
         {
+            "name": "tmp\\fragment\\Dialog.fragment.xml"
+        },
+        {
             "name": "tmp\\i18n\\i18n.properties",
             "raw": "i18n\\i18n.properties"
         },
         {
-            "name": "tmp\\i18n\\i18n_ru_RU.properties",
+            "name": "tmp\\i18n\\i18n_ru.properties",
             "raw": "i18n\\i18n.properties",
-            "locale": "_ru_RU"
+            "locale": "_ru"
         },
         {
             "name": "tmp\\index.html"

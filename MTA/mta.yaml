@@ -91,7 +91,7 @@ resources:
   parameters:
     service-plan: hdi-shared
     service: hanatrial
-    config: {schema: EHEHEHEH}
+    config: {schema: EH}
   properties:
     hdi-container-name: '${service-name}'
   type: com.sap.xs.hdi-container

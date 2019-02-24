@@ -1,4 +1,13 @@
 book_id,author_id,name
-0001,0003,Idiot
+0001,0003,Mciri
 0002,0003,Parus
-0003,0003,Chipalino
+0003,0003,Demon
+0004,0001,Idiot
+0005,0001,Igrok
+0006,0001,Besi
+0007,0002,Pro 
+0008,0002,Poslyshaite
+0009,0002,Poemi
+0010,0004,Pamyatnik
+0011,0004,Prorok
+0012,0004,Dybrovskiy

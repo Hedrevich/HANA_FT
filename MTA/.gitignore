@@ -4,6 +4,8 @@ mta-op-*
 .che
 .idea
 MTA.mtar
+mta.jar
+.gitignore
 
 fioriHtmlRunner.html
 .*/fioriHtmlRunner.html

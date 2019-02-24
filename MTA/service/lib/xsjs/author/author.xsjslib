@@ -83,4 +83,3 @@ var Author = function (connection, prefix, tableName) {
     }
 
 };
-

@@ -5,7 +5,7 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("author_display.controller.FlexibleColumnLayout", {
-		
+
 		//initialization of router
 		onInit: function () {
 			this.oRouter = this.getOwnerComponent().getRouter();
@@ -19,13 +19,13 @@ sap.ui.define([
 
 			var sLayout = oEvent.getParameter("arguments").layout;
 
-			// If there is no layout parameter, query for the default level 0 layout (normally OneColumn)
+
 			if (!sLayout) {
 				var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(0);
 				sLayout = oNextUIState.layout;
 			}
 
-			// Update the layout of the FlexibleColumnLayout
+
 			if (sLayout) {
 				oModel.setProperty("/layout", sLayout);
 			}
@@ -37,7 +37,7 @@ sap.ui.define([
 
 			this._updateUIElements();
 
-			// Save the current route name
+
 			this.currentRouteName = sRouteName;
 			this.currentAuthor = oArguments.author;
 			this.currentBook = oArguments.book;
@@ -49,13 +49,13 @@ sap.ui.define([
 
 			this._updateUIElements();
 
-			// Replace the URL with the new layout if a navigation arrow was used
+
 			if (bIsNavigationArrow) {
 				this.oRouter.navTo(this.currentRouteName, {layout: sLayout, author: this.currentAuthor, book: this.currentBook}, true);
 			}
 		},
 
-		// Update the close/fullscreen buttons visibility
+
 		_updateUIElements: function () {
 			var oModel = this.getOwnerComponent().getModel();
 			var oUIState = this.getOwnerComponent().getHelper().getCurrentUIState();
