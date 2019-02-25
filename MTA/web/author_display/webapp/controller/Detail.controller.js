@@ -110,7 +110,7 @@ sap.ui.define([
       }
 
 
-      var authorNameText = this.getView().byId("authorNameInput");
+      var authorNameText = this.getView().byId("authorNameText");
       this.getView().getModel("model").setProperty("/authorNameInput/enabled", false);
 
       var oModel = this.getView().getModel("authors");

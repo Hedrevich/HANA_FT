@@ -79,7 +79,7 @@ sap.ui.define([
         layout: sNextLayout
       });
 
-      // oModel.remove(sPath, {success: successHandler, error: errorHandler});
+
       var sAuthorURI = this.getView().getModel("config").getProperty("/authorURI");
       $.ajax({
         url: sAuthorURI + '?author_id=' + sId,
@@ -89,14 +89,14 @@ sap.ui.define([
       });
     },
 
-    //works
+
     onEdit: function() {
 
-      this.getView().getModel("model").setProperty("/enabled", false);
-      this.getView().getModel("config").setProperty("/authorNameInput/enabled", true);
+      this.getView().getModel("model").setProperty("/editBtn/enabled", false);
+      this.getView().getModel("model").setProperty("/authorNameInput/enabled", true);
     },
 
-    //works
+
     onAuthorNameSubmit: function() {
 
       function successHandler(data) {
@@ -109,16 +109,15 @@ sap.ui.define([
         console.error("updating ERROR!");
       }
 
-      //disable textField
-      var authorNameText = this.getView().byId("authorNameInput");
-      // authorNameText.setEnabled(false);
-      this.getView().getModel("config").setProperty("/authorNameInput/enabled", false);
+
+      var authorNameText = this.getView().byId("authorNameText");
+      this.getView().getModel("model").setProperty("/authorNameInput/enabled", false);
 
       var oModel = this.getView().getModel("authors");
       oModel.sDefaultUpdateMethod = "PUT";
       var sName = authorNameText.getValue();
       var sPath = this.getView().getElementBinding('authors').sPath;
-      // var sFullPath = oModel
+
 
       var oData = {
         name: sName,
@@ -130,7 +129,7 @@ sap.ui.define([
         success: successHandler,
         error: errorHandler
       });
-      this.getView().getModel("model").setProperty("/enabled", true);
+      this.getView().getModel("model").setProperty("/editBtn/enabled", true);
 
     },
 

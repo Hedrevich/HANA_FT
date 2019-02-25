@@ -1,91 +1,96 @@
 <m:View displayBlock="true" controllerName="author_display.controller.Detail" height="100%" xmlns="sap.uxap" xmlns:m="sap.m" xmlns:form="sap.ui.layout.form">
 
-	<ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
-		<headerTitle>
-			<ObjectPageDynamicHeaderTitle>
-				<expandedHeading>
-					<m:Title text="{authors>name}" wrapping="true" class="sapUiSmallMarginEnd"/>
-				</expandedHeading>
+  <ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+    <headerTitle>
+      <ObjectPageDynamicHeaderTitle>
+        <expandedHeading>
+          <m:Title text="{authors>name}" wrapping="true" class="sapUiSmallMarginEnd"/>
+        </expandedHeading>
 
-				<snappedHeading>
-					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
-						<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
-							<m:Title text="{author>name}" wrapping="true" class="sapUiTinyMarginEnd"/>
-						</m:FlexBox>
-					</m:FlexBox>
-				</snappedHeading>
+        <snappedHeading>
+          <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+            <m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+              <m:Title text="{author>name}" wrapping="true" class="sapUiTinyMarginEnd"/>
+            </m:FlexBox>
+          </m:FlexBox>
+        </snappedHeading>
 
-				<navigationActions>
-					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" tooltip="Enter Full Screen Mode" visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
-					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" tooltip="Exit Full Screen Mode" visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
-					<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose" tooltip="Close column" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
-				</navigationActions>
+        <navigationActions>
+          <m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" tooltip="Enter Full Screen Mode" visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+          <m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" tooltip="Exit Full Screen Mode" visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+          <m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose" tooltip="Close column" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+        </navigationActions>
 
-				<actions>
-					<m:Button id="editBtn" text="{i18n>editBtnName}" type="Emphasized" press=".onEdit" enabled="{model>/enabled}" icon="sap-icon://edit"/>
-					<m:Button text="{i18n>deleteBtnName}" type="Emphasized" press=".onDelete" icon="sap-icon://delete"/>
-				</actions>
+        <actions>
+          <m:Button id="editBtn" text="{i18n>editBtnName}" type="Emphasized" press=".onEdit" enabled="{model>/editBtn/enabled}" icon="sap-icon://edit"/>
+          <m:Button text="{i18n>deleteBtnName}" type="Emphasized" press=".onDelete" icon="sap-icon://delete"/>
+        </actions>
 
-			</ObjectPageDynamicHeaderTitle>
-		</headerTitle>
+      </ObjectPageDynamicHeaderTitle>
+    </headerTitle>
 
-		<headerContent>
-			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-					<m:Label text="Street"/>
-					<m:Text text="{= !${authors>toAddress/strt} ? '-' : ${authors>toAddress/strt}}"/>
-				</m:VBox>
-				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-					<m:Label text="Home number"/>
-					<m:Text text="{= !${authors>toAddress/hnum} ? '-' : ${authors>toAddress/hnum}}"/>
-				</m:VBox>
-				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-					<m:Label text="City"/>
-					<m:ObjectNumber number="{= !${authors>toAddress/city} ? '-' : ${authors>toAddress/city}}" emphasized="false"/>
-				</m:VBox>
-			</m:FlexBox>
-		</headerContent>
+    <headerContent>
+      <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+        <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+          <m:Label text="Street"/>
+          <m:Text text="{= !${authors>toAddress/strt} ? '-' : ${authors>toAddress/strt}}"/>
+        </m:VBox>
+        <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+          <m:Label text="Home number"/>
+          <m:Text text="{= !${authors>toAddress/hnum} ? '-' : ${authors>toAddress/hnum}}"/>
+        </m:VBox>
+        <m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+          <m:Label text="City"/>
+          <m:ObjectNumber number="{= !${authors>toAddress/city} ? '-' : ${authors>toAddress/city}}" emphasized="false"/>
+        </m:VBox>
+      </m:FlexBox>
+    </headerContent>
 
-		<sections>
-			<ObjectPageSection title="General Information">
-				<subSections>
-					<ObjectPageSubSection>
-						<blocks>
-							<form:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" labelSpanL="12" labelSpanM="12" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1">
-								<form:content>
-									<m:Label text="Author ID"/>
-									<m:Text text="{authors>author_id}"/>
-									<m:Label text="Author name"/>
-									<m:Input id="authorNameInput" value="{authors>name}" required="{config>/authorNameInput/required}" enabled="{config>/authorNameInput/enabled}" submit="onAuthorNameSubmit"/>
-								</form:content>
-							</form:SimpleForm>
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>
+    <sections>
+      <ObjectPageSection title="General Information">
+        <subSections>
+          <ObjectPageSubSection>
+            <blocks>
+              <form:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" labelSpanL="12" labelSpanM="12" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1">
+                <form:content>
+                  <m:Label text="Author ID"/>
+                  <m:Text text="{authors>author_id}"/>
+                  <m:Label text="Author name"/>
+                  <m:Input id="authorNameText" value="{authors>name}" required="{model>/authorNameInput/required}" enabled="{model>/authorNameInput/enabled}" submit="onAuthorNameSubmit"/>
+                </form:content>
+              </form:SimpleForm>
+            </blocks>
+          </ObjectPageSubSection>
+        </subSections>
+      </ObjectPageSection>
 
-			<ObjectPageSection title="Books">
-				<subSections>
-					<ObjectPageSubSection>
-						<blocks>
-							<m:Table id="booksTable" items="{path : 'authors>toBooks'}">
-								<m:columns>
-									<m:Column/>
-									<m:Column/>
-								</m:columns>
-								<m:items>
-									<m:ColumnListItem type="Navigation" press="handleItemPress">
-										<m:cells>
-											<m:ObjectIdentifier text="{authors>book_id}"/>
-											<m:ObjectIdentifier text="{authors>name}"/>
-										</m:cells>
-									</m:ColumnListItem>
-								</m:items>
-							</m:Table>
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>
-		</sections>
-	</ObjectPageLayout>
+      <ObjectPageSection title="Books">
+        <subSections>
+          <ObjectPageSubSection>
+            <blocks>
+              <m:Table id="booksTable" items="{path : 'authors>toBooks'}">
+                <m:headerToolbar>
+                  <m:OverflowToolbar>
+                      <m:Button text="{i18n>bookFragmentName}" type="Emphasized" press=".onAdd" icon="sap-icon://create"/>
+                  </m:OverflowToolbar>
+                </m:headerToolbar>
+                <m:columns>
+                  <m:Column/>
+                  <m:Column/>
+                </m:columns>
+                <m:items>
+                  <m:ColumnListItem type="Navigation" press="handleItemPress">
+                    <m:cells>
+                      <m:ObjectIdentifier text="{authors>book_id}"/>
+                      <m:ObjectIdentifier text="{authors>name}"/>
+                    </m:cells>
+                  </m:ColumnListItem>
+                </m:items>
+              </m:Table>
+            </blocks>
+          </ObjectPageSubSection>
+        </subSections>
+      </ObjectPageSection>
+    </sections>
+  </ObjectPageLayout>
 </m:View>

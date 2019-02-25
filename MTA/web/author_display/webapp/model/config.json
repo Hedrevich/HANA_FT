@@ -19,7 +19,7 @@
   },
 
 
-  "addressURI": "https://p2001079359trial-trial-dev-service.cfapps.eu10.hana.ondemand.com/xsjs/address/address.xsjs",
-  "bookURI": "https://p2001079359trial-trial-dev-service.cfapps.eu10.hana.ondemand.com/xsjs/book/book.xsjs",
-  "authorURI": "https://p2001079359trial-trial-dev-service.cfapps.eu10.hana.ondemand.com/xsjs/author/author.xsjs"
+  "addressURI": "https://p2001079359trial-trial-dev-router.cfapps.eu10.hana.ondemand.com/api/xsjs/address/address.xsjs",
+  "bookURI": "https://p2001079359trial-trial-dev-router.cfapps.eu10.hana.ondemand.com/api/xsjs/book/book.xsjs",
+  "authorURI": "https://p2001079359trial-trial-dev-router.cfapps.eu10.hana.ondemand.com/api/xsjs/author/author.xsjs"
 }

@@ -15,7 +15,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "https://p2001079359trial-trial-dev-service.cfapps.eu10.hana.ondemand.com/xsodata/himta.xsodata/",
+				"uri": "https://p2001079359trial-trial-dev-router.cfapps.eu10.hana.ondemand.com/api/xsodata/himta.xsodata/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"

@@ -1,1 +1,10 @@
-{"enabled": true}
+{
+  "authorNameInput": {
+    "enabled": false,
+    "required": true,
+    "value": ""
+  },
+  "editBtn": {
+    "enabled": true
+  }
+}
