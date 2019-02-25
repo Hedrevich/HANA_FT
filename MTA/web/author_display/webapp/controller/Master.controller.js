@@ -16,14 +16,27 @@ sap.ui.define([
     },
 
     createAuthor: function() {
-      var sName = this.getView().byId("newAuthorNameInput").getValue();
+      var sName = this.getView().getModel("config").getProperty("/newAuthorNameInput/value");
 
-      function successHandler() {
-        oTable.getModel("authors").refresh(true);
+      function successHandler(data) {
+        oModel.refresh(true);
+        console.log("Created");
+        console.log(data);
+
+        oAddress.author_id = data.author_id;
+
+        $.ajax({
+          url: sAddressURI,
+          type: 'POST',
+          data: JSON.stringify(oAddress),
+          success: null,
+          error: null
+        });
       }
 
-      function errorHandler() {
-        //
+      function errorHandler(error) {
+        console.error("Error creating");
+        console.error(error);
       }
 
       if (!sName) {
@@ -47,17 +60,25 @@ sap.ui.define([
 
         dialog.open();
       } else {
-        var oTable = this.getView().byId('authorsTable');
+        var oModel = this.getView().getModel("authors");
+        var sAddressURI = this.getView().getModel("config").getProperty("/addressURI");
 
-        var oData = {
+        var oAuthor = {
           name: sName
         };
 
-        oTable.getModel("authors").create("/Authors", oData, {
+        oModel.create("/Authors", oAuthor, {
           success: successHandler,
           error: errorHandler
         });
-      };
+
+        var oAddress = {
+          city: this.getView().getModel("config").getProperty("/newAddressCity/value"),
+          strt: this.getView().getModel("config").getProperty("/newAddressStreet/value"),
+          hnum: this.getView().getModel("config").getProperty("/newAddressHome/value")
+        }
+
+      }
 
       this.byId("createDialog").close();
     },
@@ -119,16 +140,13 @@ sap.ui.define([
 
     onUpdateFinished: function(oEvent) {
 
-      var sTitle,
-        oTable = oEvent.getSource(),
+      var oTable = oEvent.getSource(),
         iTotalItems = oEvent.getParameter("total");
-
+      var sTitle = this.getView().getModel("i18n").getResourceBundle().getText("authorsTitle");
       if (iTotalItems && oTable.getBinding("items").isLengthFinal()) {
-        sTitle = 'Authors(' + iTotalItems + ')';
-      } else {
-        sTitle = "Authors";
+        sTitle = sTitle + "(" + iTotalItems + ")";
       }
-      this.getView().byId("authorsTableTitle").setText(sTitle);
+      this.getView().getModel("config").setProperty("/authorsTableTitle/value", sTitle);
     }
   });
 }, true);

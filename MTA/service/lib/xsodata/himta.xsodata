@@ -4,7 +4,7 @@ service namespace "HiMTA"{
                 navigates("Authors_2_Address" as "toAddress", "Authors_2_Books" as "toBooks")
             create using "xsjs.author:authorsCreate.xsjslib::authorsCreate"
             update using "xsjs.author:authorsUpdate.xsjslib::authorsUpdate"
-            delete forbidden;
+            delete using "xsjs.author:authorsDelete.xsjslib::authorsDelete";
 
     "HiMTA::ExtraInfo.Address" as "Address"
             create forbidden

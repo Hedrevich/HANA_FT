@@ -1,70 +1,74 @@
 sap.ui.define([
-	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/mvc/Controller"
-], function (JSONModel, Controller) {
-	"use strict";
+  "sap/ui/model/json/JSONModel",
+  "sap/ui/core/mvc/Controller"
+], function(JSONModel, Controller) {
+  "use strict";
 
-	return Controller.extend("author_display.controller.FlexibleColumnLayout", {
+  return Controller.extend("author_display.controller.FlexibleColumnLayout", {
 
-		//initialization of router
-		onInit: function () {
-			this.oRouter = this.getOwnerComponent().getRouter();
-			this.oRouter.attachRouteMatched(this.onRouteMatched, this);
-			this.oRouter.attachBeforeRouteMatched(this.onBeforeRouteMatched, this);
-		},
+    //initialization of router
+    onInit: function() {
+      this.oRouter = this.getOwnerComponent().getRouter();
+      this.oRouter.attachRouteMatched(this.onRouteMatched, this);
+      this.oRouter.attachBeforeRouteMatched(this.onBeforeRouteMatched, this);
+    },
 
-		onBeforeRouteMatched: function(oEvent) {
+    onBeforeRouteMatched: function(oEvent) {
 
-			var oModel = this.getOwnerComponent().getModel();
+      var oModel = this.getOwnerComponent().getModel();
 
-			var sLayout = oEvent.getParameter("arguments").layout;
-
-
-			if (!sLayout) {
-				var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(0);
-				sLayout = oNextUIState.layout;
-			}
+      var sLayout = oEvent.getParameter("arguments").layout;
 
 
-			if (sLayout) {
-				oModel.setProperty("/layout", sLayout);
-			}
-		},
-
-		onRouteMatched: function (oEvent) {
-			var sRouteName = oEvent.getParameter("name"),
-				oArguments = oEvent.getParameter("arguments");
-
-			this._updateUIElements();
+      if (!sLayout) {
+        var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(0);
+        sLayout = oNextUIState.layout;
+      }
 
 
-			this.currentRouteName = sRouteName;
-			this.currentAuthor = oArguments.author;
-			this.currentBook = oArguments.book;
-		},
+      if (sLayout) {
+        oModel.setProperty("/layout", sLayout);
+      }
+    },
 
-		onStateChanged: function (oEvent) {
-			var bIsNavigationArrow = oEvent.getParameter("isNavigationArrow"),
-				sLayout = oEvent.getParameter("layout");
+    onRouteMatched: function(oEvent) {
+      var sRouteName = oEvent.getParameter("name"),
+        oArguments = oEvent.getParameter("arguments");
 
-			this._updateUIElements();
-
-
-			if (bIsNavigationArrow) {
-				this.oRouter.navTo(this.currentRouteName, {layout: sLayout, author: this.currentAuthor, book: this.currentBook}, true);
-			}
-		},
+      this._updateUIElements();
 
 
-		_updateUIElements: function () {
-			var oModel = this.getOwnerComponent().getModel();
-			var oUIState = this.getOwnerComponent().getHelper().getCurrentUIState();
-			oModel.setData(oUIState);
-		},
+      this.currentRouteName = sRouteName;
+      this.currentAuthor = oArguments.author;
+      this.currentBook = oArguments.book;
+    },
 
-		onExit: function () {
-			this.oRouter.detachRouteMatched(this.onRouteMatched, this);
-			this.oRouter.detachBeforeRouteMatched(this.onBeforeRouteMatched, this);
-		}
-	});
+    onStateChanged: function(oEvent) {
+      var bIsNavigationArrow = oEvent.getParameter("isNavigationArrow"),
+        sLayout = oEvent.getParameter("layout");
+
+      this._updateUIElements();
+
+
+      if (bIsNavigationArrow) {
+        this.oRouter.navTo(this.currentRouteName, {
+          layout: sLayout,
+          author: this.currentAuthor,
+          book: this.currentBook
+        }, true);
+      }
+    },
+
+
+    _updateUIElements: function() {
+      var oModel = this.getOwnerComponent().getModel();
+      var oUIState = this.getOwnerComponent().getHelper().getCurrentUIState();
+      oModel.setData(oUIState);
+    },
+
+    onExit: function() {
+      this.oRouter.detachRouteMatched(this.onRouteMatched, this);
+      this.oRouter.detachBeforeRouteMatched(this.onBeforeRouteMatched, this);
+    }
+  });
 }, true);

@@ -3,16 +3,14 @@ var JsonFormatter = $.import('xsjs', 'JsonFormatter').formatter;
 const sTABLE_NAME = "HiMTA::Author";
 
 function authorsUpdate(param) {
-
+  //get table name
   $.trace.error(JSON.stringify(param));
   var after = param.afterTableName;
 
   var pStmt = param.connection.prepareStatement("select * from \"" + after + "\"");
-
   var oResult = pStmt.executeQuery();
 
   var oAuhtorItems = JsonFormatter.recordSetToJSON(oResult, "items");
-
   var oAuthor = oAuhtorItems.items[0];
   $.trace.error(JSON.stringify(oAuthor));
 

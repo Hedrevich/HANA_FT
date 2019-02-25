@@ -16,9 +16,6 @@ sap.ui.define([
 
 			var oModel = new JSONModel();
 			this.setModel(oModel);
-
-            // set the device model
-            // this.setModel(models.createDeviceModel(), "device");
 			this.getRouter().initialize();
 		},
 

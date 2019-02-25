@@ -1,7 +1,8 @@
 sap.ui.define([
   "sap/ui/model/json/JSONModel",
-  "sap/ui/core/mvc/Controller"
-], function(JSONModel, Controller) {
+  "sap/ui/core/mvc/Controller",
+  "sap/ui/core/Fragment"
+], function(JSONModel, Controller, Fragment) {
   "use strict";
 
   return Controller.extend("author_display.controller.Detail", {
@@ -12,18 +13,12 @@ sap.ui.define([
 
       this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
       this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
-      this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onProductMatched, this);
     },
 
     handleItemPress: function(oEvent) {
       var oNextUIState = this.getOwnerComponent().getHelper().getNextUIState(2),
         bookPath = oEvent.getSource().getBindingContext("authors").getPath(),
         book = bookPath.split("/").slice(-1).pop();
-
-      this.oRouter.navTo("detailDetail", {
-        layout: oNextUIState.layout,
-        book: book
-      });
     },
 
     handleFullScreen: function() {
@@ -60,7 +55,7 @@ sap.ui.define([
       });
     },
 
-    //works
+
     onDelete: function() {
 
       function successHandler(data) {
@@ -70,8 +65,8 @@ sap.ui.define([
       }
 
       function errorHandler(error) {
-        console.log(error);
-        console.log("deleted ERROR!");
+        console.error(error);
+        console.error("deleted ERROR!");
       }
 
       var oModel = this.getView().getModel("authors");
@@ -79,25 +74,29 @@ sap.ui.define([
       var sId = sPath.slice(-6).substring(0, 4);
 
 
+      var sNextLayout = this.oModel.getProperty("/actionButtonsInfo/midColumn/closeColumn");
+      this.oRouter.navTo("master", {
+        layout: sNextLayout
+      });
+
+      // oModel.remove(sPath, {success: successHandler, error: errorHandler});
+      var sAuthorURI = this.getView().getModel("config").getProperty("/authorURI");
       $.ajax({
-        url: 'https://p2001079359trial-trial-dev-service.cfapps.eu10.hana.ondemand.com/xsjs/author/author.xsjs/author.xsjs?author_id=' + sId,
+        url: sAuthorURI + '?author_id=' + sId,
         type: 'DELETE',
         success: successHandler,
         error: errorHandler
       });
     },
 
-  ///// FIXME:
+    //works
     onEdit: function() {
-      var editBtn = this.getView().byId("editBtn");
-      editBtn.setEnabled(false);
-//// FIXME:
-      var authorNameText = this.getView().byId("authorNameText");
-      authorNameText.setEnabled(true);
-      authorNameText.focus();
+
+      this.getView().getModel("model").setProperty("/enabled", false);
+      this.getView().getModel("config").setProperty("/authorNameInput/enabled", true);
     },
 
-
+    //works
     onAuthorNameSubmit: function() {
 
       function successHandler(data) {
@@ -106,19 +105,20 @@ sap.ui.define([
       }
 
       function errorHandler(error) {
-        console.log(error);
-        console.log("updating ERROR!");
+        console.error(error);
+        console.error("updating ERROR!");
       }
 
-//FIXME
-      var authorNameText = this.getView().byId("authorNameText");
-      authorNameText.setEnabled(false);
+      //disable textField
+      var authorNameText = this.getView().byId("authorNameInput");
+      // authorNameText.setEnabled(false);
+      this.getView().getModel("config").setProperty("/authorNameInput/enabled", false);
 
       var oModel = this.getView().getModel("authors");
       oModel.sDefaultUpdateMethod = "PUT";
       var sName = authorNameText.getValue();
       var sPath = this.getView().getElementBinding('authors').sPath;
-
+      // var sFullPath = oModel
 
       var oData = {
         name: sName,
@@ -130,9 +130,87 @@ sap.ui.define([
         success: successHandler,
         error: errorHandler
       });
-//// FIXME: 
-      var editBtn = this.getView().byId("editBtn");
-      editBtn.setEnabled(true);
-    }
+      this.getView().getModel("model").setProperty("/enabled", true);
+
+    },
+
+    createBook: function() {
+      var sName = this.getView().byId("newBookName").getValue();
+
+      function successHandler(data) {
+        oModel.refresh(true);
+        console.log("Created book");
+        console.log(data);
+      }
+
+      function errorHandler(error) {
+        console.error("Error creating book");
+        console.error(error);
+      }
+
+      if (!sName) {
+        var dialog = new sap.m.Dialog({
+          title: 'Error',
+          type: 'Message',
+          state: 'Error',
+          content: new sap.m.Text({
+            text: 'Enter all necessarry field'
+          }),
+          beginButton: new sap.m.Button({
+            text: 'OK',
+            press: function() {
+              dialog.close();
+            }
+          }),
+          afterClose: function() {
+            dialog.destroy();
+          }
+        });
+
+        dialog.open();
+      } else {
+        var oModel = this.getView().getModel("authors");
+        var sBookURI = this.getView().getModel("config").getProperty("/bookURI");
+        var sPath = this.getView().getElementBinding('authors').sPath;
+        var sId = sPath.slice(-6).substring(0, 4);
+
+        var oBook = {
+          author_id: sId,
+          name: this.getView().getModel("config").getProperty("/newBookName/value")
+        };
+
+        $.ajax({
+          url: sBookURI,
+          type: 'POST',
+          data: JSON.stringify(oBook),
+          success: successHandler,
+          error: errorHandler
+        });
+
+      }
+
+      this.byId("bookDialog").close();
+    },
+
+
+    onAdd: function() {
+      var oView = this.getView();
+      if (!this.byId("bookDialog")) {
+        Fragment.load({
+          id: oView.getId(),
+          name: "author_display.fragment.DialogBook",
+          controller: this
+        }).then(function(oDialog) {
+          oView.addDependent(oDialog);
+          oDialog.open();
+        });
+      } else {
+        this.byId("bookDialog").open();
+      }
+    },
+
+    closeDialog: function() {
+      this.getView().byId("bookDialog").close();
+    },
   });
 }, true);

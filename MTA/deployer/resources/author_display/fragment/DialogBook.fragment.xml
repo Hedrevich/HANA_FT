@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+  <Dialog title="{i18n>bookFragmentName}" id="bookDialog">
+    <Panel width="100%">
+      <l:VerticalLayout>
+        <l:content>
+          <Label text="{i18n>newBookName}" width="300px" labelFor="newBookName"/>
+          <Input id="newBookName" width="300px" required="true" value="{config>/newBookName/value}"/>
+
+          <Button text="{i18n>createBtn}" type="Accept" width="300px" press=".createBook"/>
+          <Button text="{i18n>cancelBtn}" type="Default" width="300px" press=".closeDialog"/>
+        </l:content>
+      </l:VerticalLayout>
+    </Panel>
+  </Dialog>
+</core:FragmentDefinition>

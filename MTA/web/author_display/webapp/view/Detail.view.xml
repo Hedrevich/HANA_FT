@@ -22,8 +22,8 @@
 				</navigationActions>
 
 				<actions>
-					<m:Button id="editBtn" text="{i18n>editBtnName}" type="Emphasized" press=".onEdit"/>
-					<m:Button text="{i18n>deleteBtnName}" type="Emphasized" press=".onDelete"/>
+					<m:Button id="editBtn" text="{i18n>editBtnName}" type="Emphasized" press=".onEdit" enabled="{model>editBtn/enabled}" icon="sap-icon://edit"/>
+					<m:Button text="{i18n>deleteBtnName}" type="Emphasized" press=".onDelete" icon="sap-icon://delete"/>
 				</actions>
 
 			</ObjectPageDynamicHeaderTitle>
@@ -56,7 +56,7 @@
 									<m:Label text="Author ID"/>
 									<m:Text text="{authors>author_id}"/>
 									<m:Label text="Author name"/>
-									<m:Input id="authorNameText" value="{authors>name}" required="true" enabled="false" submit="onAuthorNameSubmit"/>
+									<m:Input id="authorNameInput" value="{authors>name}" required="{model>/authorNameInput/required}" enabled="{model>/authorNameInput/enabled}" submit="onAuthorNameSubmit"/>
 								</form:content>
 							</form:SimpleForm>
 						</blocks>

@@ -1,17 +1,24 @@
-<core:FragmentDefinition
-        xmlns="sap.m"
-        xmlns:core="sap.ui.core"
-        xmlns:l="sap.ui.layout" >
-    <Dialog title="Create new author" id="createDialog">
-        <Panel width="100%">
-            <l:VerticalLayout>
-                <l:content>
-                    <Label text="Author name" width="300px" labelFor="newAuthorNameInput"/>
-                    <Input id="newAuthorNameInput" width="300px" required="true"/>
-                    <Button text="Create" type="Accept" width="300px" press=".createAuthor"/>
-                    <Button text="Cancel" type="Reject" width="300px" press=".closeDialog"/>
-                </l:content>
-            </l:VerticalLayout>
-        </Panel>
-    </Dialog>
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+  <Dialog title="{i18n>fragmentName}" id="createDialog">
+    <Panel width="100%">
+      <l:VerticalLayout>
+        <l:content>
+          <Label text="{i18n>newAuthorName}" width="300px" labelFor="newAuthorNameInput"/>
+          <Input id="newAuthorNameInput" width="300px" required="true" value="{config>/newAuthorNameInput/value}"/>
+
+          <Label text="{i18n>newAddressCity}" width="300px" labelFor="newAddressCity"/>
+          <Input id="newAddressCity" width="300px" required="false" value="{config>/newAddressCity/value}"/>
+
+          <Label text="{i18n>newAddressStreet}" width="300px" labelFor="newAddressHome"/>
+          <Input id="newAddressHome" width="300px" required="false" value="{config>/newAddressStreet/value}"/>
+
+          <Label text="{i18n>newAddressHome}" width="300px" labelFor="newAddressStreet"/>
+          <Input id="newAddressStreet" width="300px" required="false" value="{config>/newAddressHome/value}"/>
+
+          <Button text="{i18n>createBtn}" type="Accept" width="300px" press=".createAuthor"/>
+          <Button text="{i18n>cancelBtn}" type="Default" width="300px" press=".closeDialog"/>
+        </l:content>
+      </l:VerticalLayout>
+    </Panel>
+  </Dialog>
 </core:FragmentDefinition>
